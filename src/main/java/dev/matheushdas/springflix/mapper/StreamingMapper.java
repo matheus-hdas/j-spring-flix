@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class StreamingMapper {
     @Autowired
-    private ModelMapper modelMapper;
+    private ModelMapper mapper;
 
     public Streaming toEntity(StreamingDTO data) {
-        return modelMapper.map(data, Streaming.class);
+        return mapper.map(data, Streaming.class);
     }
 
     public StreamingDTO toDto(Streaming data) {
-        return modelMapper.map(data, StreamingDTO.class);
+        return mapper.map(data, StreamingDTO.class);
     }
 }

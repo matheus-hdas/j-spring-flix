@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 public class CategoryMapper {
 
     @Autowired
-    private ModelMapper modelMapper;
+    private ModelMapper mapper;
 
     public Category toEntity(CategoryDTO data) {
-        return modelMapper.map(data, Category.class);
+        return mapper.map(data, Category.class);
     }
 
     public CategoryDTO toDto(Category data) {
-        return modelMapper.map(data, CategoryDTO.class);
+        return mapper.map(data, CategoryDTO.class);
     }
 }

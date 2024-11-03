@@ -14,16 +14,16 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    private CategoryService categoryService;
+    private CategoryService service;
 
     @GetMapping("/all")
     private ResponseEntity<List<CategoryDTO>> getAllCategories() {
-        return ResponseEntity.ok(categoryService.findAll());
+        return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")
     private ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Long id) {
-        CategoryDTO category = categoryService.findById(id);
+        CategoryDTO category = service.findById(id);
         return category == null ?
                 ResponseEntity.notFound().build() :
                 ResponseEntity.ok(category);
@@ -32,12 +32,12 @@ public class CategoryController {
     @PostMapping("/save")
     private ResponseEntity<CategoryDTO> saveCategory(@RequestBody CategoryDTO category) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(categoryService.save(category));
+                .body(service.save(category));
     }
 
     @DeleteMapping("/{id}")
     private ResponseEntity<?> deleteCategory(@PathVariable Long id) {
-        categoryService.delete(id);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 

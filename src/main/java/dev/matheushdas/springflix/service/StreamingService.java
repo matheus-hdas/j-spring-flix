@@ -4,7 +4,6 @@ import dev.matheushdas.springflix.dto.StreamingDTO;
 import dev.matheushdas.springflix.mapper.StreamingMapper;
 import dev.matheushdas.springflix.repository.StreamingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,28 +12,28 @@ import java.util.List;
 public class StreamingService {
 
     @Autowired
-    private StreamingRepository streamingRepository;
+    private StreamingRepository repository;
 
     @Autowired
-    private StreamingMapper streamingMapper;
+    private StreamingMapper mapper;
 
     public List<StreamingDTO> findAll() {
-        return streamingRepository.findAll()
+        return repository.findAll()
                 .stream()
-                .map(streamingMapper::toDto)
+                .map(mapper::toDto)
                 .toList();
     }
 
     public StreamingDTO findById(Long id) {
-        return streamingMapper.toDto(streamingRepository.findById(id).orElse(null));
+        return mapper.toDto(repository.findById(id).orElse(null));
     }
 
     public StreamingDTO save(StreamingDTO streaming) {
-        return streamingMapper.toDto(
-                streamingRepository.save(streamingMapper.toEntity(streaming)));
+        return mapper.toDto(
+                repository.save(mapper.toEntity(streaming)));
     }
 
     public void delete(Long id) {
-        streamingRepository.deleteById(id);
+        repository.deleteById(id);
     }
 }

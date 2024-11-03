@@ -12,28 +12,28 @@ import java.util.List;
 public class CategoryService {
 
     @Autowired
-    private CategoryRepository categoryRepository;
+    private CategoryRepository repository;
 
     @Autowired
-    private CategoryMapper categoryMapper;
+    private CategoryMapper mapper;
 
     public List<CategoryDTO> findAll() {
-        return categoryRepository.findAll()
+        return repository.findAll()
                 .stream()
-                .map(categoryMapper::toDto)
+                .map(mapper::toDto)
                 .toList();
     }
 
     public CategoryDTO save(CategoryDTO category) {
-        return categoryMapper.toDto(
-                categoryRepository.save(categoryMapper.toEntity(category)));
+        return mapper.toDto(
+                repository.save(mapper.toEntity(category)));
     }
 
     public CategoryDTO findById(Long id) {
-        return categoryMapper.toDto(categoryRepository.findById(id).orElse(null));
+        return mapper.toDto(repository.findById(id).orElse(null));
     }
 
     public void delete(Long id) {
-        categoryRepository.deleteById(id);
+        repository.deleteById(id);
     }
 }
