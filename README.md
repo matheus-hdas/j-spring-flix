@@ -28,7 +28,7 @@ cd spring-flix
 ```bash
 docker compose -f src/main/resources/compose.yaml up -d
 ```
-### 3. Run compose file
+### 3. Run application
 ```bash
 mvn spring-boot:run
 ```
