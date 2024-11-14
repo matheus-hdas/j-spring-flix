@@ -4,14 +4,10 @@ import dev.matheushdas.springflix.dto.CreateMovieRequest;
 import dev.matheushdas.springflix.dto.MovieResponse;
 import dev.matheushdas.springflix.dto.UpdateMovieRequest;
 import dev.matheushdas.springflix.entity.Movie;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MovieMapper {
-    @Autowired
-    private ModelMapper mapper;
 
     public Movie toEntity(CreateMovieRequest data) {
         return new Movie(
