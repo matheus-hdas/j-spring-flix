@@ -1,6 +1,7 @@
 package dev.matheushdas.springflix.service;
 
-import dev.matheushdas.springflix.dto.CategoryDTO;
+import dev.matheushdas.springflix.dto.CategoryResponse;
+import dev.matheushdas.springflix.dto.CreateCategoryRequest;
 import dev.matheushdas.springflix.mapper.CategoryMapper;
 import dev.matheushdas.springflix.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +18,20 @@ public class CategoryService {
     @Autowired
     private CategoryMapper mapper;
 
-    public List<CategoryDTO> findAll() {
+    public List<CategoryResponse> findAll() {
         return repository.findAll()
                 .stream()
-                .map(mapper::toDto)
+                .map(mapper::toResponse)
                 .toList();
     }
 
-    public CategoryDTO save(CategoryDTO category) {
-        return mapper.toDto(
+    public CategoryResponse save(CreateCategoryRequest category) {
+        return mapper.toResponse(
                 repository.save(mapper.toEntity(category)));
     }
 
-    public CategoryDTO findById(Long id) {
-        return mapper.toDto(repository.findById(id).orElse(null));
+    public CategoryResponse findById(Long id) {
+        return mapper.toResponse(repository.findById(id).orElseThrow());
     }
 
     public void delete(Long id) {

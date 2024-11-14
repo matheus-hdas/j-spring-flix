@@ -1,21 +1,23 @@
 package dev.matheushdas.springflix.mapper;
 
-import dev.matheushdas.springflix.dto.StreamingDTO;
+import dev.matheushdas.springflix.dto.CreateStreamingRequest;
+import dev.matheushdas.springflix.dto.StreamingResponse;
 import dev.matheushdas.springflix.entity.Streaming;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class StreamingMapper {
-    @Autowired
-    private ModelMapper mapper;
 
-    public Streaming toEntity(StreamingDTO data) {
-        return mapper.map(data, Streaming.class);
+    public Streaming toEntity(CreateStreamingRequest data) {
+        return new Streaming(
+                data.name()
+        );
     }
 
-    public StreamingDTO toDto(Streaming data) {
-        return mapper.map(data, StreamingDTO.class);
+    public StreamingResponse toResponse(Streaming data) {
+        return new StreamingResponse(
+                data.getId(),
+                data.getName()
+        );
     }
 }

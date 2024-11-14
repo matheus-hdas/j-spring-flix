@@ -49,4 +49,15 @@ public class Movie {
             inverseJoinColumns = @JoinColumn(name = "streaming_id")
     )
     private List<Streaming> streamings;
+
+    public Movie(String title, String description, LocalDate releaseDate, Double rating, LocalDateTime createdAt, LocalDateTime updatedAt, List<Category> categories, List<Streaming> streamings) {
+        this.title = title;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.rating = rating;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.categories = categories;
+        this.streamings = streamings;
+    }
 }

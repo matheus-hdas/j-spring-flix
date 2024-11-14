@@ -1,6 +1,8 @@
 package dev.matheushdas.springflix.controller;
 
-import dev.matheushdas.springflix.dto.MovieDTO;
+import dev.matheushdas.springflix.dto.CreateMovieRequest;
+import dev.matheushdas.springflix.dto.MovieResponse;
+import dev.matheushdas.springflix.dto.UpdateMovieRequest;
 import dev.matheushdas.springflix.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,13 +19,13 @@ public class MovieController {
     private MovieService service;
 
     @GetMapping("/all")
-    public ResponseEntity<List<MovieDTO>> getAllMovies() {
+    public ResponseEntity<List<MovieResponse>> getAllMovies() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieDTO> getMovieById(@PathVariable Long id) {
-        MovieDTO movie = service.findById(id);
+    public ResponseEntity<MovieResponse> getMovieById(@PathVariable Long id) {
+        MovieResponse movie = service.findById(id);
 
         return movie == null ?
                 ResponseEntity.notFound().build() :
@@ -31,13 +33,13 @@ public class MovieController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<MovieDTO> saveMovie(@RequestBody MovieDTO movie) {
+    public ResponseEntity<MovieResponse> saveMovie(@RequestBody CreateMovieRequest movie) {
         return ResponseEntity.status(HttpStatus.CREATED)
                .body(service.save(movie));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<MovieDTO> updateMovie(@RequestBody MovieDTO movie) {
+    public ResponseEntity<MovieResponse> updateMovie(@RequestBody UpdateMovieRequest movie) {
         return ResponseEntity.ok(service.update(movie));
     }
 
