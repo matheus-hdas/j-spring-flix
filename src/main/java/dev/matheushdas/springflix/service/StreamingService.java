@@ -4,19 +4,17 @@ import dev.matheushdas.springflix.dto.CreateStreamingRequest;
 import dev.matheushdas.springflix.dto.StreamingResponse;
 import dev.matheushdas.springflix.mapper.StreamingMapper;
 import dev.matheushdas.springflix.repository.StreamingRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class StreamingService {
-
-    @Autowired
-    private StreamingRepository repository;
-
-    @Autowired
-    private StreamingMapper mapper;
+    private final StreamingRepository repository;
+    private final StreamingMapper mapper;
 
     public List<StreamingResponse> findAll() {
         return repository.findAll()

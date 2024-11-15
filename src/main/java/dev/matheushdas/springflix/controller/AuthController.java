@@ -5,17 +5,16 @@ import dev.matheushdas.springflix.dto.LoginResponse;
 import dev.matheushdas.springflix.dto.RegisterRequest;
 import dev.matheushdas.springflix.dto.RegisterResponse;
 import dev.matheushdas.springflix.service.AuthService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
-
-    @Autowired
-    private AuthService service;
+    private final AuthService service;
 
     @PostMapping("/register")
     public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest user) {

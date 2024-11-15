@@ -6,19 +6,17 @@ import dev.matheushdas.springflix.dto.UpdateMovieRequest;
 import dev.matheushdas.springflix.entity.Movie;
 import dev.matheushdas.springflix.mapper.MovieMapper;
 import dev.matheushdas.springflix.repository.MovieRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class MovieService {
-
-    @Autowired
-    private MovieRepository repository;
-
-    @Autowired
-    private MovieMapper mapper;
+    private final MovieRepository repository;
+    private final MovieMapper mapper;
 
     public List<MovieResponse> findAll() {
         return repository.findAll()
