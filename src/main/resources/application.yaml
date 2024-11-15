@@ -18,6 +18,5 @@ spring:
   flyway:
     enabled: true
 
-api:
-  security:
-    secret: ${ALGORITHM_SECRET}
+
+secret: ${ALG_SECRET}

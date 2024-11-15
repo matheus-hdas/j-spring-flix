@@ -12,14 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthService implements UserDetailsService {
+public class AuthService {
 
     @Autowired
     private UserRepository repository;
@@ -40,11 +37,6 @@ public class AuthService implements UserDetailsService {
         User encrypted = mapper.toEntity(user);
         encrypted.setPassword(encoder.encode(encrypted.getPassword()));
         return mapper.toResponse(repository.save(encrypted));
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return repository.findUserByEmail(username).orElseThrow();
     }
 
     public LoginResponse login(LoginRequest userCredentials) {

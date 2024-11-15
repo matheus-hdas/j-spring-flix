@@ -15,8 +15,8 @@ import java.util.Optional;
 @Component
 public class TokenProvider {
 
-    @Value("${api.security.secret}")
-    private String secret;
+    @Value("${secret:api-secret}")
+    private String secret = "";
     private final Algorithm alg = Algorithm.HMAC256(secret);
 
     public String generateToken(User user) {
