@@ -4,19 +4,16 @@ import dev.matheushdas.springflix.dto.CategoryResponse;
 import dev.matheushdas.springflix.dto.CreateCategoryRequest;
 import dev.matheushdas.springflix.mapper.CategoryMapper;
 import dev.matheushdas.springflix.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryService {
-
-    @Autowired
-    private CategoryRepository repository;
-
-    @Autowired
-    private CategoryMapper mapper;
+    private final CategoryRepository repository;
+    private final CategoryMapper mapper;
 
     public List<CategoryResponse> findAll() {
         return repository.findAll()

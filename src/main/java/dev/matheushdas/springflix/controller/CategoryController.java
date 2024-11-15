@@ -3,7 +3,7 @@ package dev.matheushdas.springflix.controller;
 import dev.matheushdas.springflix.dto.CategoryResponse;
 import dev.matheushdas.springflix.dto.CreateCategoryRequest;
 import dev.matheushdas.springflix.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/category")
+@RequiredArgsConstructor
 public class CategoryController {
-
-    @Autowired
-    private CategoryService service;
+    private final CategoryService service;
 
     @GetMapping("/all")
     private ResponseEntity<List<CategoryResponse>> getAllCategories() {

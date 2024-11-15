@@ -3,7 +3,7 @@ package dev.matheushdas.springflix.controller;
 import dev.matheushdas.springflix.dto.CreateStreamingRequest;
 import dev.matheushdas.springflix.dto.StreamingResponse;
 import dev.matheushdas.springflix.service.StreamingService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +12,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/streaming")
+@RequiredArgsConstructor
 public class StreamingController {
-
-    @Autowired
-    private StreamingService service;
+    private final StreamingService service;
 
     @GetMapping("/all")
     public ResponseEntity<List<StreamingResponse>> getAllStreamings() {
