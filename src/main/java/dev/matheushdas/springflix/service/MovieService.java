@@ -1,6 +1,8 @@
 package dev.matheushdas.springflix.service;
 
-import dev.matheushdas.springflix.dto.MovieDTO;
+import dev.matheushdas.springflix.dto.CreateMovieRequest;
+import dev.matheushdas.springflix.dto.MovieResponse;
+import dev.matheushdas.springflix.dto.UpdateMovieRequest;
 import dev.matheushdas.springflix.entity.Movie;
 import dev.matheushdas.springflix.mapper.MovieMapper;
 import dev.matheushdas.springflix.repository.MovieRepository;
@@ -18,35 +20,35 @@ public class MovieService {
     @Autowired
     private MovieMapper mapper;
 
-    public List<MovieDTO> findAll() {
+    public List<MovieResponse> findAll() {
         return repository.findAll()
                 .stream()
-                .map(mapper::toDto)
+                .map(mapper::toResponse)
                 .toList();
     }
 
-    public MovieDTO findById(Long id) {
-        return mapper.toDto(repository.findById(id).orElse(null));
+    public MovieResponse findById(Long id) {
+        return mapper.toResponse(repository.findById(id).orElseThrow());
     }
 
-    public MovieDTO save(MovieDTO movie) {
-        return mapper.toDto(repository.save(mapper.toEntity(movie)));
+    public MovieResponse save(CreateMovieRequest movie) {
+        return mapper.toResponse(repository.save(mapper.toEntity(movie)));
     }
 
-    public MovieDTO update(MovieDTO movie) {
-        Movie toUpdate = repository.findById(movie.getId()).orElseThrow();
-        toUpdate.setTitle(movie.getTitle());
-        toUpdate.setDescription(movie.getDescription());
-        toUpdate.setRating(movie.getRating());
-        toUpdate.setReleaseDate(movie.getReleaseDate());
+    public MovieResponse update(UpdateMovieRequest movie) {
+        Movie toUpdate = repository.findById(movie.id()).orElseThrow();
+        toUpdate.setTitle(movie.title());
+        toUpdate.setDescription(movie.description());
+        toUpdate.setRating(movie.rating());
+        toUpdate.setReleaseDate(movie.releaseDate());
 
         toUpdate.getCategories().clear();
-        toUpdate.getCategories().addAll(movie.getCategories());
+        toUpdate.getCategories().addAll(movie.categories());
 
         toUpdate.getStreamings().clear();
-        toUpdate.getStreamings().addAll(movie.getStreamings());
+        toUpdate.getStreamings().addAll(movie.streamings());
 
-        return mapper.toDto(repository.save(toUpdate));
+        return mapper.toResponse(repository.save(toUpdate));
     }
 
     public void delete(Long id) {

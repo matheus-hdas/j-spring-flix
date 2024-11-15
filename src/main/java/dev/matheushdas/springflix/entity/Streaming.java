@@ -15,4 +15,8 @@ public class Streaming {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    public Streaming(String name) {
+        this.name = name;
+    }
 }

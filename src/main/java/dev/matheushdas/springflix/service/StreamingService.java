@@ -1,6 +1,7 @@
 package dev.matheushdas.springflix.service;
 
-import dev.matheushdas.springflix.dto.StreamingDTO;
+import dev.matheushdas.springflix.dto.CreateStreamingRequest;
+import dev.matheushdas.springflix.dto.StreamingResponse;
 import dev.matheushdas.springflix.mapper.StreamingMapper;
 import dev.matheushdas.springflix.repository.StreamingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,19 @@ public class StreamingService {
     @Autowired
     private StreamingMapper mapper;
 
-    public List<StreamingDTO> findAll() {
+    public List<StreamingResponse> findAll() {
         return repository.findAll()
                 .stream()
-                .map(mapper::toDto)
+                .map(mapper::toResponse)
                 .toList();
     }
 
-    public StreamingDTO findById(Long id) {
-        return mapper.toDto(repository.findById(id).orElse(null));
+    public StreamingResponse findById(Long id) {
+        return mapper.toResponse(repository.findById(id).orElseThrow());
     }
 
-    public StreamingDTO save(StreamingDTO streaming) {
-        return mapper.toDto(
+    public StreamingResponse save(CreateStreamingRequest streaming) {
+        return mapper.toResponse(
                 repository.save(mapper.toEntity(streaming)));
     }
 

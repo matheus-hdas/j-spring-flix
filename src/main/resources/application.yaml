@@ -17,3 +17,6 @@ spring:
 
   flyway:
     enabled: true
+
+
+secret: ${ALG_SECRET}
